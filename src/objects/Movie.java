@@ -1,5 +1,6 @@
 package objects;
 
+import javafx.scene.image.Image;
 import parser.MovieParser;
 
 import java.awt.image.BufferedImage;
@@ -10,7 +11,7 @@ public class Movie extends MovieParser implements Serializable {
 
     protected String movieURL;
 
-    protected BufferedImage movieThumbnail;
+//    protected Image movieThumbnail;
     protected String movieName;
     protected int movieYear;
     protected String genre;
@@ -29,10 +30,6 @@ public class Movie extends MovieParser implements Serializable {
 
     public String getMovieURL() {
         return movieURL;
-    }
-
-    public BufferedImage getMovieThumbnail() {
-        return movieThumbnail;
     }
 
     public String getMovieName() {

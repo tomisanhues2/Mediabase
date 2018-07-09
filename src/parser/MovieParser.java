@@ -1,23 +1,12 @@
 package parser;
 
-
-import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.html.HtmlForm;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import com.gargoylesoftware.htmlunit.html.HtmlSubmitInput;
-import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
-import org.junit.Test;
+import javafx.scene.image.Image;
+import org.json.JSONObject;
 import resources.IMovie;
-import org.json.*;
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
-import java.net.URLConnection;
 import java.util.Scanner;
 
 public class MovieParser implements IMovie {
@@ -29,33 +18,62 @@ public class MovieParser implements IMovie {
 
     }
 
-    public MovieParser(String movieName) throws IOException {
+    public MovieParser(String movieName) {
 
-        URL movieSearch = new URL(DATABASE_URL_STRING + "t=" + movieName + DATABASE_API_KEY);
-        InputStream urlConnection = movieSearch.openStream();
-        System.out.println(movieSearch);
-        try (Scanner scanner = new Scanner(urlConnection)) {
-            scanner.useDelimiter("\\a");
-            String result = scanner.hasNext() ? scanner.next() : "";
-            movieJSON = new JSONObject(result);
+        try {
+            URL movieSearch = new URL(DATABASE_URL_STRING + "t=" + movieName + DATABASE_API_KEY);
+            InputStream urlConnection = movieSearch.openStream();
+            System.out.println(movieSearch);
+            try (Scanner scanner = new Scanner(urlConnection)) {
+                scanner.useDelimiter("\\a");
+                String result = scanner.hasNext() ? scanner.next() : "";
+                setMovieJSON(new JSONObject(result));
+            }
+            //displayMovieThumbnail();  //Uncomment to run without IMDb
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        displayMovieThumbnail();  //Uncomment to run without IMDb
+    }
 
+
+    public JSONObject getMovieJSON() {
+        return movieJSON;
+    }
+
+    public void setMovieJSON(JSONObject movieJSON) {
+        if (movieJSON.getString("Response").equalsIgnoreCase("True")) {
+            this.movieJSON = movieJSON;
+        } else {
+            System.exit(1);
+        }
     }
 
     //NOT USING IMDb
-    private void displayMovieThumbnail() throws IOException{
-        BufferedImage bufferedImage;
+    public Image getMovieThumbnail() {
+        try {
+            Image image;
             URL key = new URL(movieJSON.getString("Poster"));
-            bufferedImage = ImageParser.getImageFromUrl(key);
-
+            image = ImageParser.getImageFromUrl(key);
+            return image;
             //TEST IMAGE CODE START//
-        JFrame frame = new JFrame();
+/*        JFrame frame = new JFrame();
         frame.getContentPane().setLayout(new FlowLayout());
         frame.add(new JLabel(new ImageIcon(bufferedImage)));
         frame.pack();
-        frame.setVisible(true);
+        frame.setVisible(true);*/
             //TEST IMAGE CODE END//
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public String getMoviePlot() {
+        return movieJSON.getString("Plot");
+    }
+
+    public String getMovieName() {
+        return movieJSON.getString("Title");
     }
 
 
