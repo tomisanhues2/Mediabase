@@ -8,21 +8,27 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
+<?import javafx.scene.control.cell.PropertyValueFactory?>
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="492.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MenuListController">
    <children>
       <SplitPane dividerPositions="0.8938775510204081" layoutX="284.0" layoutY="146.0" orientation="VERTICAL" prefHeight="492.0" prefWidth="729.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                <children>
-                  <TableView prefHeight="406.0" prefWidth="728.0" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <TableView fx:id="movieTable" prefHeight="406.0" prefWidth="728.0" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <columns>
-                      <TableColumn fx:id="listTableID" prefWidth="43.19998174905777" text="%listTableID" />
-                      <TableColumn fx:id="listTableTile" prefWidth="164.79998779296875" text="%listTableTitle" />
-                        <TableColumn fx:id="listTableYear" prefWidth="65.60003662109375" text="%listTableYear" />
-                        <TableColumn fx:id="listTableGenre" prefWidth="87.199951171875" text="%listTableGenre" />
-                        <TableColumn fx:id="listTableActors" prefWidth="116.0" text="%listTableActors" />
-                        <TableColumn fx:id="listTableRatings" prefWidth="58.39996337890625" text="%listTableRating" />
-                        <TableColumn fx:id="listTablePoster" prefWidth="197.5999755859375" text="%listTablePoster" />
+                      <TableColumn fx:id="listTableID" prefWidth="43.19998174905777" text="%movieIDString" />
+                      <TableColumn fx:id="listTableTitle" prefWidth="164.79998779296875" text="%movieTitleString">
+                          <cellValueFactory>
+                              <PropertyValueFactory
+                                      property="title"></PropertyValueFactory>
+                          </cellValueFactory>
+                      </TableColumn>
+                        <TableColumn fx:id="listTableYear" prefWidth="65.60003662109375" text="%movieYearString" />
+                        <TableColumn fx:id="listTableGenre" prefWidth="87.199951171875" text="%movieGenreString" />
+                        <TableColumn fx:id="listTableActors" prefWidth="116.0" text="%movieActorsString" />
+                        <TableColumn fx:id="listTableRatings" prefWidth="58.39996337890625" text="%movieRatingString" />
+                        <TableColumn fx:id="listTablePoster" prefWidth="197.5999755859375" text="%moviePosterString" />
                     </columns>
                   </TableView>
                </children>

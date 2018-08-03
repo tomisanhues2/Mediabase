@@ -1,6 +1,9 @@
 package resources;
 
 
+import javafx.collections.ObservableList;
+import objects.Movie;
+
 public interface IMovie {
 
 
@@ -9,8 +12,6 @@ public interface IMovie {
     String DATABASE_OPTIONAL_LANGUAGE = "&language=en-US";
 
     String DATABASE_IMAGE_URL_STRING = "https://image.tmdb.org/t/p/";
-
-
 
     String TEST_MOVIE_ID_STRING = "348350"; //remove me
     int TEST_MOVIE_ID_INT = 348350; //remove me

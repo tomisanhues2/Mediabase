@@ -2,18 +2,17 @@ package controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.TextFieldTableCell;
 import resources.IConstant;
+import resources.IObservableLists;
 
-public class MenuListController implements IConstant {
+public class MenuListController implements IConstant, IObservableLists {
 
     @FXML
     private TableColumn listTableID;
     @FXML
-    private TableColumn listTableTile;
+    private TableColumn listTableTitle;
     @FXML
     private TableColumn listTableYear;
     @FXML
@@ -30,10 +29,29 @@ public class MenuListController implements IConstant {
     private TextField listSearchBar;
     @FXML
     private Button listSearchButton;
+    @FXML
+    private TableView movieTable;
 
     @FXML
     public void searchMovieButton(ActionEvent event) {
 
     }
+
+    @FXML
+    public void initialize() {
+        listTableTitle.setCellFactory(TextFieldTableCell.forTableColumn());
+        listTableYear.setCellFactory(TextFieldTableCell.forTableColumn());
+        listTableGenre.setCellFactory(TextFieldTableCell.forTableColumn());
+        listTableActors.setCellFactory(TextFieldTableCell.forTableColumn());
+        listTableRatings.setCellFactory(TextFieldTableCell.forTableColumn());
+        movieTable.setItems(moviesObservableList);
+//        listTablePoster.setCellFactory(TextFieldTableCell.forTableColumn());
+    }
+
+    public void addMoviesToTable() {
+
+    }
+
+
 
 }

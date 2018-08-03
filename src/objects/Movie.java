@@ -3,12 +3,13 @@ package objects;
 import javafx.scene.image.Image;
 import parser.MovieParser;
 import resources.IDManager;
+import resources.IObservableLists;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.Serializable;
 
-public class Movie extends IDManager implements Serializable {
+public class Movie extends IDManager implements Serializable, IObservableLists {
 
     private int databaseID;
     private int ID;
@@ -21,6 +22,14 @@ public class Movie extends IDManager implements Serializable {
 
     public Movie(int databaseID) {
         this.databaseID =  databaseID;
+        IObservableLists.addMovieToObservableList(this);
+    }
+
+    public Movie(String title, String year, String genres, String actors) {
+        this.title = title;
+        this.year = year;
+        this.genres = genres;
+        this.actors = actors;
     }
 
     public int getID() {
