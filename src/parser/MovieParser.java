@@ -1,80 +1,56 @@
 package parser;
 
-import javafx.scene.image.Image;
+import com.mashape.unirest.http.HttpResponse;
+import com.mashape.unirest.http.Unirest;
+import com.mashape.unirest.http.exceptions.UnirestException;
+import objects.Movie;
+import org.json.JSONArray;
 import org.json.JSONObject;
 import resources.IMovie;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
-import java.util.Scanner;
+public class MovieParser extends Movie implements IMovie {
 
-public class MovieParser implements IMovie {
+    private int movieID;
 
-    private URL url;
-    JSONObject movieJSON;
 
-    public MovieParser() {
-
-    }
-
-    public MovieParser(String movieName) {
-
+    public MovieParser(int movieID) {
+        super(movieID);
+        this.movieID = movieID;
         try {
-            URL movieSearch = new URL(DATABASE_URL_STRING + "t=" + movieName + DATABASE_API_KEY);
-            InputStream urlConnection = movieSearch.openStream();
-            System.out.println(movieSearch);
-            try (Scanner scanner = new Scanner(urlConnection)) {
-                scanner.useDelimiter("\\a");
-                String result = scanner.hasNext() ? scanner.next() : "";
-                setMovieJSON(new JSONObject(result));
-            }
-            //displayMovieThumbnail();  //Uncomment to run without IMDb
-        } catch (IOException e) {
+            getDetailsFromWeb();
+            getCreditsFromWeb();
+            getImagesFromWebURL();
+        } catch (UnirestException e) {
             e.printStackTrace();
         }
     }
 
 
-    public JSONObject getMovieJSON() {
-        return movieJSON;
+    private void getDetailsFromWeb() throws UnirestException {
+        HttpResponse<String> detailsResponse = Unirest.get(IMovie.GET_DETAILS_URL_FROM_WEB(movieID)).asString();
+        JSONObject detailsJSON = new JSONObject(detailsResponse.getBody());
+        setID(getTotalMovieID());
+        setTitle(detailsJSON.getString("title"));
+        setYear(detailsJSON.getString("release_date"));
+        setGenres(detailsJSON.getJSONArray("genres").getJSONObject(0).getString("name"));
+
     }
 
-    public void setMovieJSON(JSONObject movieJSON) {
-        if (movieJSON.getString("Response").equalsIgnoreCase("True")) {
-            this.movieJSON = movieJSON;
-        } else {
-            System.exit(1);
+    private void getCreditsFromWeb() throws UnirestException {
+        HttpResponse<String> creditsResponse = Unirest.get(IMovie.GET_CREDITS_URL_FROM_WEB(movieID)).asString();
+        JSONObject creditsJSON = new JSONObject(creditsResponse.getBody());
+        JSONArray actorsArray = creditsJSON.getJSONArray("cast");
+        String actorsString = "";
+        for (int i = 0; i < 3; i++) {
+            actorsString += actorsArray.getJSONObject(i).getString("name") + ", ";
         }
+        setActors(actorsString);
     }
 
-    //NOT USING IMDb
-    public Image getMovieThumbnail() {
-        try {
-            Image image;
-            URL key = new URL(movieJSON.getString("Poster"));
-            image = ImageParser.getImageFromUrl(key);
-            return image;
-            //TEST IMAGE CODE START//
-/*        JFrame frame = new JFrame();
-        frame.getContentPane().setLayout(new FlowLayout());
-        frame.add(new JLabel(new ImageIcon(bufferedImage)));
-        frame.pack();
-        frame.setVisible(true);*/
-            //TEST IMAGE CODE END//
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
+    private void getImagesFromWebURL() throws UnirestException{
+        HttpResponse<String> imagesResponse = Unirest.get(IMovie.GET_IMAGES_URL_FROM_WEB(movieID)).asString();
+        JSONObject imagesJSON = new JSONObject(imagesResponse.getBody());
+        JSONArray imagesArray = imagesJSON.getJSONArray("posters");
+        setImageURL(imagesArray.getJSONObject(0).getString("file_path"));
     }
-
-    public String getMoviePlot() {
-        return movieJSON.getString("Plot");
-    }
-
-    public String getMovieName() {
-        return movieJSON.getString("Title");
-    }
-
-
 }

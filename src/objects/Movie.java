@@ -2,53 +2,84 @@ package objects;
 
 import javafx.scene.image.Image;
 import parser.MovieParser;
+import resources.IDManager;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.Serializable;
 
-public class Movie extends MovieParser implements Serializable {
+public class Movie extends IDManager implements Serializable {
 
-    protected String movieURL;
+    private int databaseID;
+    private int ID;
+    private String title;
+    private String year;
+    private String genres;
+    private String actors;
+    private Image thumbnail;
+    private String imageURL;
 
-//    protected Image movieThumbnail;
-    protected String movieName;
-    protected int movieYear;
-    protected String genre;
-
-    //PRIVATE ACTOR LIST
-    protected double rating;
-    protected String MPAA;
-
-    public Movie() {
-
+    public Movie(int databaseID) {
+        this.databaseID =  databaseID;
     }
 
-    public Movie(String movieName) throws IOException {
-        super(movieName);
+    public int getID() {
+        return ID;
     }
 
-    public String getMovieURL() {
-        return movieURL;
+    public void setID(int ID) {
+        this.ID = ID;
     }
 
-    public String getMovieName() {
-        return movieName;
+    public String getTitle() {
+        return title;
     }
 
-    public int getMovieYear() {
-        return movieYear;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public String getGenre() {
-        return genre;
+    public String getYear() {
+        return year;
     }
 
-    public double getRating() {
-        return rating;
+    public void setYear(String year) {
+        this.year = year;
     }
 
-    public String getMPAA() {
-        return MPAA;
+    public String getGenres() {
+        return genres;
+    }
+
+    public void setGenres(String genres) {
+        this.genres = genres;
+    }
+
+    public String getActors() {
+        return actors;
+    }
+
+    public void setActors(String actors) {
+        this.actors = actors;
+    }
+
+    public Image getThumbnail() {
+        return thumbnail;
+    }
+
+    public void setThumbnail(Image thumbnail) {
+        this.thumbnail = thumbnail;
+    }
+
+    public String getImageURL() {
+        return imageURL;
+    }
+
+    public void setImageURL(String imageURL) {
+        this.imageURL = imageURL;
+    }
+
+    public int getDatabaseID() {
+        return databaseID;
     }
 }
