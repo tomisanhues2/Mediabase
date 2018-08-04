@@ -17,11 +17,12 @@ public class Movie extends IDManager implements Serializable, IObservableLists {
     private String year;
     private String genres;
     private String actors;
+    private String rating;
     private Image thumbnail;
     private String imageURL;
 
     public Movie(int databaseID) {
-        this.databaseID =  databaseID;
+        this.databaseID = databaseID;
         IObservableLists.addMovieToObservableList(this);
     }
 

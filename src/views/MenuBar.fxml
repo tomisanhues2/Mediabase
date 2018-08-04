@@ -8,16 +8,16 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 
-<HBox alignment="TOP_CENTER" prefHeight="28.0" prefWidth="800.0" BorderPane.alignment="CENTER" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MenuBarController">
+<HBox alignment="TOP_CENTER" prefHeight="30.0" prefWidth="800.0" BorderPane.alignment="CENTER" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MenuBarController">
     <children>
-        <ToolBar prefHeight="40.0" HBox.hgrow="ALWAYS">
+        <ToolBar prefHeight="30.0" HBox.hgrow="ALWAYS">
             <items>
-            <StackPane prefWidth="265.0">
+                <StackPane prefWidth="265.0">
                <children>
                       <Button mnemonicParsing="false" text="%menuBarListButton" StackPane.alignment="TOP_LEFT" />
                </children>
             </StackPane>
-                <StackPane prefHeight="31.0" prefWidth="270.0">
+                <StackPane prefHeight="30.0" prefWidth="270.0">
                     <children>
                         <Label text="%toolBarText" textFill="#5b1818" />
                     </children>
@@ -28,9 +28,7 @@
                </children>
                 </StackPane>
             </items>
-            <HBox.margin>
-                <Insets bottom="20.0" />
-            </HBox.margin>
+
         </ToolBar>
     </children>
 </HBox>

@@ -39,6 +39,7 @@ public class MenuListController implements IConstant, IObservableLists {
 
     @FXML
     public void initialize() {
+        listTableID.setCellFactory(TextFieldTableCell.forTableColumn());
         listTableTitle.setCellFactory(TextFieldTableCell.forTableColumn());
         listTableYear.setCellFactory(TextFieldTableCell.forTableColumn());
         listTableGenre.setCellFactory(TextFieldTableCell.forTableColumn());

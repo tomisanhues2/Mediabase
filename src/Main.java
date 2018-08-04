@@ -17,13 +17,11 @@ public class Main extends Application implements IConstant, IMovie, IObservableL
     @Override
     public void start(Stage primaryStage) throws Exception {
         FXMLLoader test = new FXMLLoader();
-        Parent parent = test.load(getClass().getClassLoader().getResource("views/MovieList.fxml"),messages);
-
+        Parent parent = test.load(getClass().getClassLoader().getResource("views/AddMovie.fxml"),messages);
         Scene scene = new Scene(parent);
         primaryStage.setScene(scene);
         primaryStage.setTitle("Mediabase");
         primaryStage.show();
-        IObservableLists.addMovieToObservableList(new Movie("TestMovieTitle","1292/12/12","Action, XXXX","Bruce lee"));
     }
 
     public static void main(String[] args) {
@@ -38,3 +36,28 @@ public class Main extends Application implements IConstant, IMovie, IObservableL
             e.printStackTrace();
         }
     }*/
+
+
+/*
+*         FXMLLoader test = new FXMLLoader();
+        Parent parent = test.load(getClass().getClassLoader().getResource("views/MovieList.fxml"),messages);
+
+        Scene scene = new Scene(parent);
+        primaryStage.setScene(scene);
+        primaryStage.setTitle("Mediabase");
+        primaryStage.show();
+        IObservableLists.addMovieToObservableList(new Movie("TestMovieTitle","1292/12/12","Action, XXXX","Bruce lee"));
+        IObservableLists.addMovieToObservableList(new Movie("TestMovieTitle","1292/12/12","Action, XXXX","Bruce lee"));
+        IObservableLists.addMovieToObservableList(new Movie("TestMovieTitle","1292/12/12","Action, XXXX","Bruce lee"));
+        IObservableLists.addMovieToObservableList(new Movie("TestMovieTitle","1292/12/12","Action, XXXX","Bruce lee"));
+        IObservableLists.addMovieToObservableList(new Movie("TestMovieTitle","1292/12/12","Action, XXXX","Bruce lee"));
+        IObservableLists.addMovieToObservableList(new Movie("TestMovieTitle","1292/12/12","Action, XXXX","Bruce lee"));
+        IObservableLists.addMovieToObservableList(new Movie("TestMovieTitle","1292/12/12","Action, XXXX","Bruce lee"));
+        IObservableLists.addMovieToObservableList(new Movie("TestMovieTitle","1292/12/12","Action, XXXX","Bruce lee"));
+        IObservableLists.addMovieToObservableList(new Movie("TestMovieTitle","1292/12/12","Action, XXXX","Bruce lee"));
+
+*
+*
+*
+*
+* */
