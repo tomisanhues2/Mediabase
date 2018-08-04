@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="492.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MenuListController">
+   <children>
+      <SplitPane dividerPositions="0.8938775510204081" layoutX="284.0" layoutY="146.0" orientation="VERTICAL" prefHeight="492.0" prefWidth="729.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+               <children>
+                  <TableView fx:id="movieTable" prefHeight="406.0" prefWidth="728.0" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <columns>
+                      <TableColumn fx:id="listTableID" prefWidth="43.19998174905777" text="%movieIDString" />
+                      <TableColumn fx:id="listTableTitle" prefWidth="164.79998779296875" text="%movieTitleString">
+                          <cellValueFactory>
+                              <PropertyValueFactory
+                                      property="title"></PropertyValueFactory>
+                          </cellValueFactory>
+                      </TableColumn>
+                        <TableColumn fx:id="listTableYear" prefWidth="65.60003662109375" text="%movieYearString" />
+                        <TableColumn fx:id="listTableGenre" prefWidth="87.199951171875" text="%movieGenreString" />
+                        <TableColumn fx:id="listTableActors" prefWidth="116.0" text="%movieActorsString" />
+                        <TableColumn fx:id="listTableRatings" prefWidth="58.39996337890625" text="%movieRatingString" />
+                        <TableColumn fx:id="listTablePoster" prefWidth="197.5999755859375" text="%moviePosterString" />
+                    </columns>
+                  </TableView>
+               </children>
+            </AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="76.0" prefWidth="728.0">
+               <children>
+                  <Label fx:id="listSearchTitle" layoutX="14.0" layoutY="16.0" text="%listSearchTitle" />
+                  <TextField fx:id="listSearchBar" layoutX="131.0" layoutY="10.0" prefHeight="26.0" prefWidth="214.0" text="%listSearchBar" />
+                  <Button fx:id="listSearchButton" layoutX="394.0" layoutY="8.0" mnemonicParsing="false" onAction="#searchMovieButton" prefHeight="32.0" prefWidth="104.0" text="%listSearchButton" />
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+   </children>
+</AnchorPane>

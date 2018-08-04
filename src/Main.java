@@ -4,30 +4,37 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import objects.Movie;
+import parser.MovieParser;
 import resources.IConstant;
+import resources.IMovie;
+import resources.IObservableLists;
+import resources.MySQLManager;
 
-public class Main extends Application implements IConstant{
+import java.sql.SQLException;
 
-    public static void main(String[] args) {
-        try {
-//            Movie movie = new Movie("Star+trek"); //RUN ME <3
-                launch(args);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+public class Main extends Application implements IConstant, IMovie, IObservableLists {
 
     @Override
-    public void start(Stage stage) throws Exception {
-        FXMLLoader mainMenu = new FXMLLoader();
-        Parent root = mainMenu.load(
-                getClass().getClassLoader().getResource("views/AddMovie.fxml"),
-                messages);
+    public void start(Stage primaryStage) throws Exception {
+        FXMLLoader test = new FXMLLoader();
+        Parent parent = test.load(getClass().getClassLoader().getResource("views/MovieList.fxml"),messages);
 
-        Scene scene = new Scene(root);
+        Scene scene = new Scene(parent);
+        primaryStage.setScene(scene);
+        primaryStage.setTitle("Mediabase");
+        primaryStage.show();
+        IObservableLists.addMovieToObservableList(new Movie("TestMovieTitle","1292/12/12","Action, XXXX","Bruce lee"));
+    }
 
-        stage.setScene(scene);
-        stage.setTitle("Mediabase");
-        stage.show();
+    public static void main(String[] args) {
+        launch(args);
     }
 }
+/*    public static void main(String[] args) {
+        try {
+            MySQLManager mySQLManager = new MySQLManager();
+            mySQLManager.getMoviesFromList();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }*/
