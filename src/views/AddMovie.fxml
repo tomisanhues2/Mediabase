@@ -41,45 +41,7 @@
          <children>
             <VBox prefHeight="400.0" prefWidth="400.0">
                <children>
-                  <VBox maxWidth="410.0" prefHeight="80.0" prefWidth="410.0">
-                     <children>
-                        <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="800.0" spacing="38.0">
-                           <children>
-                              <Label prefWidth="200.0" text="%newListNameLabel">
-                                 <font>
-                                    <Font size="16.0" />
-                                 </font>
-                              </Label>
-                              <TextField>
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
-                              </TextField>
-                           </children>
-                        </HBox>
-                        <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="800.0" spacing="38.0">
-                           <children>
-                              <Label prefWidth="200.0" text="%newListAuthorName">
-                                 <font>
-                                    <Font size="16.0" />
-                                 </font>
-                              </Label>
-                              <TextField>
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
-                              </TextField>
-                           </children>
-                        </HBox>
-                     </children>
-                     <padding>
-                        <Insets left="20.0" />
-                     </padding>
-                     <VBox.margin>
-                        <Insets bottom="10.0" />
-                     </VBox.margin>
-                  </VBox>
-                  <TableView fx:id="movieTable" prefHeight="420.0" prefWidth="420.0" tableMenuButtonVisible="true">
+                  <TableView fx:id="movieTable" prefHeight="500.0" prefWidth="420.0" tableMenuButtonVisible="true">
                      <columns>
                         <TableColumn fx:id="listTableTitle" editable="false" prefWidth="189.0" resizable="false" text="%movieTitleString">
                            <cellValueFactory>

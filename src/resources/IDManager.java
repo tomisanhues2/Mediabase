@@ -2,7 +2,7 @@ package resources;
 
 public class IDManager {
 
-    private static int totalMovieID = 0;
+    private static Integer totalMovieID = 0;
 
     public IDManager() {
         totalMovieID++;
@@ -11,7 +11,7 @@ public class IDManager {
         }
     }
 
-    public static int getTotalMovieID() {
+    public static Integer getTotalMovieID() {
         return totalMovieID;
     }
 }

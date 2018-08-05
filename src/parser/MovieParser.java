@@ -33,6 +33,7 @@ public class MovieParser extends Movie implements IMovie {
         setTitle(detailsJSON.getString("title"));
         setYear(detailsJSON.getString("release_date"));
         setGenres(detailsJSON.getJSONArray("genres").getJSONObject(0).getString("name"));
+        setScore(detailsJSON.getString("vote_average"));
 
     }
 

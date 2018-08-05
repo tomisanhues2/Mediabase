@@ -11,16 +11,9 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MovieListController">
-   <top>
-      <VBox prefHeight="40.0" prefWidth="100.0" BorderPane.alignment="CENTER">
-         <BorderPane.margin>
-            <Insets bottom="10.0" />
-         </BorderPane.margin>
-      </VBox>
-   </top>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MovieListController">
    <center>
       <SplitPane dividerPositions="0.9" orientation="VERTICAL" BorderPane.alignment="CENTER">
         <items>
@@ -28,7 +21,11 @@
                <children>
                   <TableView fx:id="movieTable" prefHeight="400.0" tableMenuButtonVisible="true">
                      <columns>
-                        <TableColumn fx:id="listTableID" editable="false" maxWidth="52.0" minWidth="52.0" prefWidth="52.0" resizable="false" text="%movieIDString" />
+                        <TableColumn fx:id="listTableID" editable="false" maxWidth="52.0" minWidth="52.0" prefWidth="52.0" resizable="false" text="%movieIDString">
+                           <cellValueFactory>
+                              <PropertyValueFactory property="ID" />
+                           </cellValueFactory>
+                        </TableColumn>
                         <TableColumn fx:id="listTableTitle" prefWidth="234.0" text="%movieTitleString">
                            <cellValueFactory>
                               <PropertyValueFactory property="title" />
@@ -39,9 +36,9 @@
                               <PropertyValueFactory property="year" />
                            </cellValueFactory>
                         </TableColumn>
-                        <TableColumn fx:id="listTableRatings" prefWidth="74.0" text="%movieRatingString">
+                        <TableColumn fx:id="listTableScore" prefWidth="74.0" text="%movieRatingString">
                            <cellValueFactory>
-                              <PropertyValueFactory property="year" />
+                              <PropertyValueFactory property="score" />
                            </cellValueFactory>
                         </TableColumn>
                         <TableColumn fx:id="listTablePoster" prefWidth="340.0" text="%moviePosterString" />
@@ -55,7 +52,7 @@
             <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="800.0" spacing="30.0">
                <children>
                   <Label fx:id="listSearchTitle" text="%listSearchTitle" />
-                  <TextField fx:id="listSearchBar" prefHeight="26.0" prefWidth="214.0" text="%listSearchBar" />
+                  <TextField fx:id="listSearchBar" prefHeight="26.0" prefWidth="214.0" />
                   <Button fx:id="listSearchButton" mnemonicParsing="false" onAction="#searchMovieButton" prefHeight="32.0" prefWidth="104.0" text="%listSearchButton" />
                </children>
                <padding>
@@ -65,4 +62,50 @@
         </items>
       </SplitPane>
    </center>
+   <top>
+      <HBox alignment="CENTER" prefHeight="80.0" prefWidth="800.0" spacing="30.0" BorderPane.alignment="CENTER">
+         <children>
+            <VBox alignment="TOP_CENTER" prefWidth="150.0" spacing="10.0">
+               <children>
+                  <Label alignment="CENTER" prefWidth="120.0" text="%listNameLabel">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="nameListString" alignment="CENTER" prefWidth="120.0" text="test">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+               </children>
+               <padding>
+                  <Insets top="10.0" />
+               </padding>
+            </VBox>
+            <VBox alignment="TOP_CENTER" prefWidth="150.0" spacing="10.0">
+               <children>
+                  <Label alignment="CENTER" prefWidth="120.0" text="%listAuthorLabel">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="authorListString" alignment="CENTER" prefWidth="120.0" text="test">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+               </children>
+               <padding>
+                  <Insets top="10.0" />
+               </padding>
+            </VBox>
+         </children>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding>
+      </HBox>
+   </top>
 </BorderPane>

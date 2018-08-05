@@ -12,32 +12,39 @@ import java.io.Serializable;
 public class Movie extends IDManager implements Serializable, IObservableLists {
 
     private int databaseID;
-    private int ID;
+    private Integer ID;
     private String title;
     private String year;
     private String genres;
     private String actors;
-    private String rating;
+    private String score;
     private Image thumbnail;
     private String imageURL;
 
     public Movie(int databaseID) {
         this.databaseID = databaseID;
+        this.ID = getTotalMovieID();
         IObservableLists.addMovieToObservableList(this);
     }
 
-    public Movie(String title, String year, String genres, String actors) {
+    public Movie(String title, String year, String genres, String actors, String score) {
         this.title = title;
         this.year = year;
         this.genres = genres;
         this.actors = actors;
+        this.score = score;
+        this.ID = getTotalMovieID();
     }
 
-    public int getID() {
+    public void setDatabaseID(int databaseID) {
+        this.databaseID = databaseID;
+    }
+
+    public Integer getID() {
         return ID;
     }
 
-    public void setID(int ID) {
+    public void setID(Integer ID) {
         this.ID = ID;
     }
 
@@ -71,6 +78,14 @@ public class Movie extends IDManager implements Serializable, IObservableLists {
 
     public void setActors(String actors) {
         this.actors = actors;
+    }
+
+    public String getScore() {
+        return score;
+    }
+
+    public void setScore(String score) {
+        this.score = score + "/10";
     }
 
     public Image getThumbnail() {

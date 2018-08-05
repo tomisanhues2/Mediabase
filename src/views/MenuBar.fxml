@@ -14,7 +14,7 @@
             <Font size="14.0" />
          </font>
       </Button>
-      <Label alignment="CENTER" prefHeight="30.0" prefWidth="220.0" text="%toolBarText">
+      <Label alignment="CENTER" prefHeight="30.0" prefWidth="220.0" text="%menuTitleString">
          <font>
             <Font size="14.0" />
          </font>

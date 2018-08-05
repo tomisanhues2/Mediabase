@@ -2,10 +2,19 @@ package controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.stage.Stage;
+import javafx.util.converter.IntegerStringConverter;
+
+import objects.Movie;
 import resources.IConstant;
 import resources.IObservableLists;
+
+import java.io.IOException;
 
 public class MovieListController implements IConstant, IObservableLists {
 
@@ -16,21 +25,13 @@ public class MovieListController implements IConstant, IObservableLists {
     @FXML
     private TableColumn listTableYear;
     @FXML
-    private TableColumn listTableGenre;
-    @FXML
-    private TableColumn listTableActors;
-    @FXML
-    private TableColumn listTableRatings;
-    @FXML
-    private TableColumn listTablePoster;
-    @FXML
-    private Label listSearchTitle;
-    @FXML
-    private TextField listSearchBar;
-    @FXML
-    private Button listSearchButton;
+    private TableColumn listTableScore;
     @FXML
     private TableView movieTable;
+    @FXML
+    private Label nameListString;
+    @FXML
+    private Label authorListString;
 
     @FXML
     public void searchMovieButton(ActionEvent event) {
@@ -38,20 +39,35 @@ public class MovieListController implements IConstant, IObservableLists {
     }
 
     @FXML
-    public void initialize() {
-        listTableID.setCellFactory(TextFieldTableCell.forTableColumn());
+    public void initialize() throws IOException {
+        listTableID.setCellFactory(TextFieldTableCell.<Movie, Integer>forTableColumn(new IntegerStringConverter()));
         listTableTitle.setCellFactory(TextFieldTableCell.forTableColumn());
         listTableYear.setCellFactory(TextFieldTableCell.forTableColumn());
-        listTableGenre.setCellFactory(TextFieldTableCell.forTableColumn());
-        listTableActors.setCellFactory(TextFieldTableCell.forTableColumn());
-        listTableRatings.setCellFactory(TextFieldTableCell.forTableColumn());
+        listTableScore.setCellFactory(TextFieldTableCell.forTableColumn());
         movieTable.setItems(moviesObservableList);
 //        listTablePoster.setCellFactory(TextFieldTableCell.forTableColumn());
+
+        if (nameListString.getText().isEmpty() || authorListString.getText().isEmpty()) {
+            Stage stage = new Stage();
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            Parent parent = fxmlLoader.load(getClass().getClassLoader().getResource("views/CreateList.fxml"), messages);
+            stage.setScene(new Scene(parent));
+            stage.showAndWait();
+        }
     }
 
     public void addMoviesToTable() {
 
     }
+
+    public void setAuthorListString(String string) {
+        authorListString.setText(string);
+    }
+
+    public void setNameListString(String string) {
+        nameListString.setText(string);
+    }
+
 
 
 

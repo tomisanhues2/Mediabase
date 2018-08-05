@@ -6,9 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-import objects.AddMovie;
 import resources.IConstant;
 
 import java.io.IOException;
@@ -19,32 +17,39 @@ public class StartPageController implements IConstant {
     public Button menuNewListButton;
     public Button menuViewListButton;
     public Label menuTitleString;
+    private String buttonPressed;
 
-    Stage stage;
 
     public void menuButtonPressed(ActionEvent event) {
+        FXMLLoader fxmlLoader = new FXMLLoader();
 
         Stage stage;
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        Parent newRoot = null;
+        Stage stage1 = new Stage();
+        Parent parent = null;
+        Parent parent1 = null;
+        boolean bool = false;
         try {
-            stage = (Stage) menuTitleString.getScene().getWindow();
+            stage = ((Stage) menuTitleString.getScene().getWindow());
 
-            String buttonPressed = ((Button) event.getSource()).getId();
+            buttonPressed = ((Button) event.getSource()).getId();
 
             switch (buttonPressed) {
                 case "menuNewListButton":
-                    newRoot = fxmlLoader.load(
-                            getClass().getClassLoader().getResource(
-                                    "views/AddMovie.fxml"), messages);
+                    parent = fxmlLoader.load(getClass().getClassLoader().getResource("views/MovieList.fxml"), messages);
+                    parent1 = fxmlLoader.load(getClass().getClassLoader().getResource("views/AddMovie.fxml"), messages);
+                    bool = true;
                     break;
                 case "menuViewListButton":
-                    newRoot = fxmlLoader.load(
+                    parent = fxmlLoader.load(
                             getClass().getClassLoader().getResource(
                                     "views/MovieList.fxml"), messages);
                     break;
             }
-            stage.setScene(new Scene(newRoot));
+            stage.setScene(new Scene(parent));
+            if (bool) {
+                stage1.setScene(new Scene(parent1));
+                stage1.show();
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
