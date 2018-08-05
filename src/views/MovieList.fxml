@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.SplitPane?>
@@ -7,49 +8,61 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.cell.PropertyValueFactory?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="492.0" prefWidth="800.0" stylesheets="@../css/styles.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MenuListController">
-    <children>
-        <SplitPane dividerPositions="0.08979591836734693, 0.8938775510204081" layoutX="284.0" layoutY="146.0" orientation="VERTICAL" prefHeight="492.0" prefWidth="729.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-            <items>
-            <AnchorPane maxHeight="30.0" prefHeight="30.0" styleClass="background">
-                <fx:include source="MenuBar.fxml" />
-            </AnchorPane>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
-                    <children>
-                        <TableView fx:id="movieTable" prefHeight="383.0" prefWidth="788.0" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="0.0">
-                            <columns>
-                                <TableColumn fx:id="listTableID" editable="false" maxWidth="112.79998475313187" minWidth="40" prefWidth="74.39996033906937" text="%movieIDString" />
-                                <TableColumn fx:id="listTableTitle" prefWidth="236.8000030517578" text="%movieTitleString">
-                                    <cellValueFactory>
-                                        <PropertyValueFactory property="title" />
-                                    </cellValueFactory>
-                                </TableColumn>
 
-                                <TableColumn fx:id="listTableYear" prefWidth="68.79998779296875" text="%movieYearString">
-                                    <cellValueFactory>
-                                        <PropertyValueFactory property="year" />
-                                    </cellValueFactory>
-                                </TableColumn>
-                                <TableColumn fx:id="listTableRatings" prefWidth="126.39996337890625" text="%movieRatingString">
-                                    <cellValueFactory>
-                                        <PropertyValueFactory property="year" />
-                                    </cellValueFactory>
-                                </TableColumn>
-                                <TableColumn fx:id="listTablePoster" prefWidth="285.60003662109375" text="%moviePosterString" />
-                            </columns>
-                        </TableView>
-                    </children>
-                </AnchorPane>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="76.0" prefWidth="728.0">
-                    <children>
-                        <Label fx:id="listSearchTitle" layoutX="14.0" layoutY="16.0" text="%listSearchTitle" />
-                        <TextField fx:id="listSearchBar" layoutX="131.0" layoutY="10.0" prefHeight="26.0" prefWidth="214.0" text="%listSearchBar" />
-                        <Button fx:id="listSearchButton" layoutX="394.0" layoutY="8.0" mnemonicParsing="false" onAction="#searchMovieButton" prefHeight="32.0" prefWidth="104.0" text="%listSearchButton" />
-                    </children>
-                </AnchorPane>
-            </items>
-        </SplitPane>
-    </children>
-</AnchorPane>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MovieListController">
+   <top>
+      <VBox prefHeight="40.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets bottom="10.0" />
+         </BorderPane.margin>
+      </VBox>
+   </top>
+   <center>
+      <SplitPane dividerPositions="0.9" orientation="VERTICAL" BorderPane.alignment="CENTER">
+        <items>
+            <HBox prefHeight="100.0" prefWidth="800.0">
+               <children>
+                  <TableView fx:id="movieTable" prefHeight="400.0" tableMenuButtonVisible="true">
+                     <columns>
+                        <TableColumn fx:id="listTableID" editable="false" maxWidth="52.0" minWidth="52.0" prefWidth="52.0" resizable="false" text="%movieIDString" />
+                        <TableColumn fx:id="listTableTitle" prefWidth="234.0" text="%movieTitleString">
+                           <cellValueFactory>
+                              <PropertyValueFactory property="title" />
+                           </cellValueFactory>
+                        </TableColumn>
+                        <TableColumn fx:id="listTableYear" prefWidth="94.0" text="%movieYearString">
+                           <cellValueFactory>
+                              <PropertyValueFactory property="year" />
+                           </cellValueFactory>
+                        </TableColumn>
+                        <TableColumn fx:id="listTableRatings" prefWidth="74.0" text="%movieRatingString">
+                           <cellValueFactory>
+                              <PropertyValueFactory property="year" />
+                           </cellValueFactory>
+                        </TableColumn>
+                        <TableColumn fx:id="listTablePoster" prefWidth="340.0" text="%moviePosterString" />
+                     </columns>
+                  </TableView>
+               </children>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="800.0" spacing="30.0">
+               <children>
+                  <Label fx:id="listSearchTitle" text="%listSearchTitle" />
+                  <TextField fx:id="listSearchBar" prefHeight="26.0" prefWidth="214.0" text="%listSearchBar" />
+                  <Button fx:id="listSearchButton" mnemonicParsing="false" onAction="#searchMovieButton" prefHeight="32.0" prefWidth="104.0" text="%listSearchButton" />
+               </children>
+               <padding>
+                  <Insets left="50.0" right="50.0" />
+               </padding>
+            </HBox>
+        </items>
+      </SplitPane>
+   </center>
+</BorderPane>

@@ -7,7 +7,7 @@ import javafx.scene.control.cell.TextFieldTableCell;
 import resources.IConstant;
 import resources.IObservableLists;
 
-public class MenuListController implements IConstant, IObservableLists {
+public class MovieListController implements IConstant, IObservableLists {
 
     @FXML
     private TableColumn listTableID;

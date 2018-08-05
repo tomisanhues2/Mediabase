@@ -15,7 +15,7 @@ public class AddMovie {
         this.year = year;
         this.thumbnail = thumbnail;
         this.rating = rating;
-        this.description = description;
+        setDescription(description);
     }
 
     public String getDescription() {
@@ -23,7 +23,11 @@ public class AddMovie {
     }
 
     public void setDescription(String description) {
-        this.description = description;
+        if (description.toCharArray().length > 290) {
+            this.description = description.substring(0,290);
+        } else {
+            this.description = description;
+        }
     }
 
     public String getTitle() {

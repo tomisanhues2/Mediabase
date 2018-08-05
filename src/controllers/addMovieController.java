@@ -34,6 +34,8 @@ public class addMovieController implements IObservableLists, IMovie {
     private Button searchNewMovie;
     @FXML
     private TextField newMovieInput;
+    @FXML
+    private Label addMovieTitle;
 
     @FXML
     public void searchNewMovie(ActionEvent event) {
@@ -63,6 +65,7 @@ public class addMovieController implements IObservableLists, IMovie {
 
     private void selectedMovie(int selectedIndex) {
         addMovieImage.setImage(searchMoviesObservableList.get(selectedIndex).getThumbnail());
+        addMovieTitle.setText(searchMoviesObservableList.get(selectedIndex).getTitle());
         addMovieDescription.setText(searchMoviesObservableList.get(selectedIndex).getDescription());
     }
 

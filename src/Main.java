@@ -17,7 +17,7 @@ public class Main extends Application implements IConstant, IMovie, IObservableL
     @Override
     public void start(Stage primaryStage) throws Exception {
         FXMLLoader test = new FXMLLoader();
-        Parent parent = test.load(getClass().getClassLoader().getResource("views/AddMovie.fxml"),messages);
+        Parent parent = test.load(getClass().getClassLoader().getResource("views/StartPage.fxml"),messages);
         Scene scene = new Scene(parent);
         primaryStage.setScene(scene);
         primaryStage.setTitle("Mediabase");
@@ -28,6 +28,9 @@ public class Main extends Application implements IConstant, IMovie, IObservableL
         launch(args);
     }
 }
+
+
+
 /*    public static void main(String[] args) {
         try {
             MySQLManager mySQLManager = new MySQLManager();
