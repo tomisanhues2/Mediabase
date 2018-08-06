@@ -7,7 +7,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.converter.IntegerStringConverter;
 
 import objects.Movie;
@@ -33,6 +35,7 @@ public class MovieListController implements IConstant, IObservableLists {
     @FXML
     private Label authorListString;
 
+
     @FXML
     public void searchMovieButton(ActionEvent event) {
 
@@ -47,11 +50,12 @@ public class MovieListController implements IConstant, IObservableLists {
         movieTable.setItems(moviesObservableList);
 //        listTablePoster.setCellFactory(TextFieldTableCell.forTableColumn());
 
-        if (nameListString.getText().isEmpty() || authorListString.getText().isEmpty()) {
+        if (nameListString.getText().equalsIgnoreCase("new") || authorListString.getText().equalsIgnoreCase("new")) {
             Stage stage = new Stage();
             FXMLLoader fxmlLoader = new FXMLLoader();
             Parent parent = fxmlLoader.load(getClass().getClassLoader().getResource("views/CreateList.fxml"), messages);
             stage.setScene(new Scene(parent));
+
             stage.showAndWait();
         }
     }

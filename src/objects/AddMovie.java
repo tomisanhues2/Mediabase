@@ -24,7 +24,7 @@ public class AddMovie {
 
     public void setDescription(String description) {
         if (description.toCharArray().length > 290) {
-            this.description = description.substring(0,290);
+            this.description = description.substring(0,290) + "...";
         } else {
             this.description = description;
         }

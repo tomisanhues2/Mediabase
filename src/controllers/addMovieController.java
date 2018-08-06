@@ -86,8 +86,7 @@ public class addMovieController implements IObservableLists, IMovie {
                 jsonObject = moviesArray.getJSONObject(i);
                 IObservableLists.addMovieSearchToObservableList(new AddMovie(jsonObject.getString("title"),
                         jsonObject.getString("release_date"),
-                        IMovie.GET_IMAGE_URL_FROM_OBJECT(IMovie.GET_JSON_IMAGE_FROM_OBJECT_URL(jsonObject)),
-                        jsonObject.getNumber("vote_average") + "",
+                        IMovie.GET_IMAGE_URL_FROM_OBJECT(IMovie.GET_JSON_IMAGE_FROM_OBJECT_URL(jsonObject)), jsonObject.getInt("vote_average") + "",
                         jsonObject.getString("overview")));
             }
         } catch (UnirestException e) {
