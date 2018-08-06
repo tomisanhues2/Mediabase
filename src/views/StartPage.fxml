@@ -7,17 +7,16 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="800.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.StartPageController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="800.0" stylesheets="/css/styles.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.StartPageController">
    <bottom>
-      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="40.0" BorderPane.alignment="CENTER">
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="800.0" spacing="40.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="menuNewListButton" mnemonicParsing="false" onAction="#menuButtonPressed" prefHeight="30.0" prefWidth="250.0" text="%menuNewListButton">
+            <Button fx:id="menuNewListButton" mnemonicParsing="false" onAction="#menuButtonPressed" prefHeight="30.0" prefWidth="250.0" text="%menuNewListButton" textFill="WHITE">
                <font>
                   <Font size="20.0" />
                </font>
             </Button>
-            <Button fx:id="menuViewListButton" mnemonicParsing="false" onAction="#menuButtonPressed" prefHeight="30.0" prefWidth="250.0" text="%menuViewListButton">
+            <Button fx:id="menuViewListButton" mnemonicParsing="false" onAction="#menuButtonPressed" prefHeight="30.0" prefWidth="250.0" text="%menuViewListButton" textFill="WHITE">
                <font>
                   <Font size="20.0" />
                </font>
@@ -28,9 +27,9 @@
    <top>
       <HBox alignment="TOP_CENTER" prefHeight="200.0" BorderPane.alignment="CENTER">
          <children>
-            <Label fx:id="menuTitleString" alignment="CENTER" contentDisplay="CENTER" text="%menuTitleString" textAlignment="CENTER">
+            <Label styleClass="title" fx:id="menuTitleString" contentDisplay="TOP" style="-fx-font-size: 60px;" text="%menuTitleString" textAlignment="CENTER" textFill="#34495e">
                <font>
-                  <Font size="30.0" />
+                  <Font name="Gill Sans Ultra Bold" size="40.0" />
                </font>
             </Label>
          </children>

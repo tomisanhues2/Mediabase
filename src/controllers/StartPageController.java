@@ -40,9 +40,8 @@ public class StartPageController implements IConstant {
                     bool = true;
                     break;
                 case "menuViewListButton":
-                    parent = fxmlLoader.load(
-                            getClass().getClassLoader().getResource(
-                                    "views/MovieList.fxml"), messages);
+                    parent = fxmlLoader.load(getClass().getClassLoader().getResource("views/ListView.fxml"), messages);
+                    startExistingProcess();
                     break;
             }
             stage.setScene(new Scene(parent));
@@ -53,6 +52,11 @@ public class StartPageController implements IConstant {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+    }
+
+    private void startExistingProcess() {
+
 
     }
 

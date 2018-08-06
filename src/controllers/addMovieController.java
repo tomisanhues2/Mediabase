@@ -14,12 +14,16 @@ import javafx.scene.image.ImageView;
 import objects.AddMovie;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import parser.MovieParser;
 import resources.IMovie;
 import resources.IObservableLists;
 
 
 public class addMovieController implements IObservableLists, IMovie {
-
+    @FXML
+    public Button addNewMovie;
+    @FXML
+    public Button searchNewMovie;
     @FXML
     private ImageView addMovieImage;
     @FXML
@@ -33,19 +37,33 @@ public class addMovieController implements IObservableLists, IMovie {
     @FXML
     private TableColumn listTableRatings;
     @FXML
-    private Button searchNewMovie;
-    @FXML
     private TextField newMovieInput;
     @FXML
     private Label addMovieTitle;
 
+    private int databaseID = 0;
+
+    private MovieParser movieParser;
+
     @FXML
     public void searchNewMovie(ActionEvent event) {
+        if (!IObservableLists.searchMoviesObservableList.isEmpty())
+            IObservableLists.searchMoviesObservableList.clear();
+        ((Button) event.getSource()).setDisable(true);
+        newMovieInput.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue.equals(oldValue)) {
+                ((Button) event.getSource()).setDisable(true);
+                newMovieInput.getStyleClass().set(1, "invalidInput");
+            } else
+                ((Button) event.getSource()).setDisable(false);
+    });
+
         if (!newMovieInput.getText().isEmpty()) {
             String movieSearchName = newMovieInput.getText();
             getMoviesFromSearch(movieSearchName);
+            newMovieInput.getStyleClass().set(1, "validInput");
         } else {
-            newMovieInput.setText("Invalid Input, try again");
+            newMovieInput.getStyleClass().set(1, "invalidInput");
         }
     }
 
@@ -69,11 +87,23 @@ public class addMovieController implements IObservableLists, IMovie {
         addMovieImage.setImage(searchMoviesObservableList.get(selectedIndex).getThumbnail());
         addMovieTitle.setText(searchMoviesObservableList.get(selectedIndex).getTitle());
         addMovieDescription.setText(searchMoviesObservableList.get(selectedIndex).getDescription());
+        setDatabaseID(searchMoviesObservableList.get(selectedIndex).getDatabaseID());
+
     }
 
 
     public void addNewMovie(ActionEvent actionEvent) {
+        if (getDatabaseID() != 0) {
+            movieParser = new MovieParser(getDatabaseID());
+        }
+    }
 
+    public int getDatabaseID() {
+        return databaseID;
+    }
+
+    public void setDatabaseID(int databaseID) {
+        this.databaseID = databaseID;
     }
 
     private void getMoviesFromSearch(String movieName) {
@@ -87,10 +117,10 @@ public class addMovieController implements IObservableLists, IMovie {
                 IObservableLists.addMovieSearchToObservableList(new AddMovie(jsonObject.getString("title"),
                         jsonObject.getString("release_date"),
                         IMovie.GET_IMAGE_URL_FROM_OBJECT(IMovie.GET_JSON_IMAGE_FROM_OBJECT_URL(jsonObject)), jsonObject.getInt("vote_average") + "",
-                        jsonObject.getString("overview")));
+                        jsonObject.getString("overview"), jsonObject.getInt("id")));
             }
         } catch (UnirestException e) {
-            e.printStackTrace();
+            System.out.println(e.getCause().toString());
         }
     }
 }

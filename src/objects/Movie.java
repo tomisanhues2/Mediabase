@@ -21,18 +21,26 @@ public class Movie extends IDManager implements Serializable, IObservableLists {
     private Image thumbnail;
     private String imageURL;
 
+    private final String more = "Click here for more...";
+
     public Movie(int databaseID) {
         this.databaseID = databaseID;
         this.ID = getTotalMovieID();
         IObservableLists.addMovieToObservableList(this);
     }
 
+    public String getMore() {
+        return more;
+    }
+
+
+
     public Movie(String title, String year, String genres, String actors, String score) {
         this.title = title;
-        this.year = year;
+        setYear(year);
         this.genres = genres;
         this.actors = actors;
-        this.score = score;
+        setScore(score);
         this.ID = getTotalMovieID();
     }
 
@@ -61,7 +69,7 @@ public class Movie extends IDManager implements Serializable, IObservableLists {
     }
 
     public void setYear(String year) {
-        this.year = year;
+        this.year = year.substring(0,4);
     }
 
     public String getGenres() {
@@ -85,7 +93,9 @@ public class Movie extends IDManager implements Serializable, IObservableLists {
     }
 
     public void setScore(String score) {
-        this.score = score + "/10";
+        if (score.length() < 3) {
+            this.score = score + "/10";
+        }
     }
 
     public Image getThumbnail() {
@@ -106,5 +116,9 @@ public class Movie extends IDManager implements Serializable, IObservableLists {
 
     public int getDatabaseID() {
         return databaseID;
+    }
+
+    public void setScore(int score) {
+        this.score = score + "/10";
     }
 }

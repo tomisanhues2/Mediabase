@@ -33,7 +33,7 @@ public class MovieParser extends Movie implements IMovie {
         setTitle(detailsJSON.getString("title"));
         setYear(detailsJSON.getString("release_date"));
         setGenres(detailsJSON.getJSONArray("genres").getJSONObject(0).getString("name"));
-        setScore(detailsJSON.getString("vote_average"));
+        setScore(detailsJSON.getInt("vote_average"));
 
     }
 
@@ -42,7 +42,8 @@ public class MovieParser extends Movie implements IMovie {
         JSONObject creditsJSON = new JSONObject(creditsResponse.getBody());
         JSONArray actorsArray = creditsJSON.getJSONArray("cast");
         String actorsString = "";
-        for (int i = 0; i < 3; i++) {
+        int totalActors = (actorsArray.length() < 3) ? actorsArray.length() : 3;
+        for (int i = 0; i < totalActors; i++) {
             actorsString += actorsArray.getJSONObject(i).getString("name") + ", ";
         }
         setActors(actorsString);

@@ -19,6 +19,7 @@ public class Main extends Application implements IConstant, IMovie, IObservableL
         FXMLLoader test = new FXMLLoader();
         Parent parent = test.load(getClass().getClassLoader().getResource("views/StartPage.fxml"),messages);
         Scene scene = new Scene(parent);
+        scene.getStylesheets().add("/css/styles.css");
         primaryStage.setScene(scene);
         primaryStage.setTitle("Mediabase");
         primaryStage.show();

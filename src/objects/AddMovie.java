@@ -4,18 +4,20 @@ import javafx.scene.image.Image;
 
 public class AddMovie {
 
+    private int databaseID;
     private String title;
     private String year;
     private String rating;
     private Image thumbnail;
     private String description;
 
-    public AddMovie(String title, String year, Image thumbnail, String rating, String description) {
+    public AddMovie(String title, String year, Image thumbnail, String rating, String description, int databaseID) {
         this.title = title;
-        this.year = year;
+        setYear(year);
         this.thumbnail = thumbnail;
-        this.rating = rating;
+        setRating(rating);
         setDescription(description);
+        setDatabaseID(databaseID);
     }
 
     public String getDescription() {
@@ -28,6 +30,14 @@ public class AddMovie {
         } else {
             this.description = description;
         }
+    }
+
+    public int getDatabaseID() {
+        return databaseID;
+    }
+
+    public void setDatabaseID(int databaseID) {
+        this.databaseID = databaseID;
     }
 
     public String getTitle() {
@@ -43,7 +53,12 @@ public class AddMovie {
     }
 
     public void setYear(String year) {
-        this.year = year;
+        if (year.length() < 4) {
+            this.year = "0000";
+        } else {
+            this.year = year.substring(0,4);
+        }
+
     }
 
     public Image getThumbnail() {
@@ -59,6 +74,8 @@ public class AddMovie {
     }
 
     public void setRating(String rating) {
-        this.rating = rating;
+        if (rating.length() < 3) {
+            this.rating = rating + "/10";
+        }
     }
 }
