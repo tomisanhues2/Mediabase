@@ -6,20 +6,19 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-
-<HBox alignment="CENTER_LEFT" stylesheets="/css/styles.css" styleClass="toolBar" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="800.0" spacing="40.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MenuBarController">
+<HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="800.0" spacing="40.0" styleClass="toolBar" stylesheets="/css/styles.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MenuBarController">
    <children>
       <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="220.0" text="%menuBarListButton" visible="false">
          <font>
             <Font size="14.0" />
          </font>
       </Button>
-      <Label alignment="CENTER"  styleClass="toolBarTitle" prefHeight="30.0" prefWidth="220.0" text="%menuTitleString">
+      <Label alignment="CENTER" prefHeight="30.0" prefWidth="220.0" styleClass="toolBarTitle" text="%menuTitleString">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Button mnemonicParsing="false"  prefHeight="30.0" prefWidth="220.0" text="%menuBarSaveButton">
+      <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="220.0" text="%menuBarSaveButton">
          <font>
             <Font size="14.0" />
          </font>

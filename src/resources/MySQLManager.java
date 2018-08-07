@@ -10,9 +10,9 @@ import java.util.ArrayList;
 public class MySQLManager implements IObservableLists {
 
 
-    private final String URL = "jdbc:mysql://10.16.8.187:3306/mediabase?serverTimezone=UTC";  // jdbc:subprotocol:subname
-    private final String USER = "mediabase";
-    private final String PASSWORD = "mediabase";
+    private final String URL = "jdbc:mysql://sql9.freemysqlhosting.net:3306/sql9250882?serverTimezone=UTC";  // jdbc:subprotocol:subname
+    private final String USER = "sql9250882";
+    private final String PASSWORD = "az2htT8htN";
     private int totalListCount = 0;
 
     private static Connection connection;
@@ -110,7 +110,6 @@ public class MySQLManager implements IObservableLists {
                 listAuthor = resultSet.getString("ListAuthor");
                 IObservableLists.addListToObservableList(new List(listID, listName, listAuthor));
                 totalListCount++;
-                System.out.println("List added");
             }
         } catch (SQLException ignore) {
             ignore.printStackTrace();

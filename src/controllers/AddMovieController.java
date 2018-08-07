@@ -19,7 +19,7 @@ import resources.IMovie;
 import resources.IObservableLists;
 
 
-public class addMovieController implements IObservableLists, IMovie {
+public class AddMovieController implements IObservableLists, IMovie {
     @FXML
     public Button addNewMovie;
     @FXML
