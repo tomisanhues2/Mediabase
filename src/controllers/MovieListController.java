@@ -42,13 +42,21 @@ public class MovieListController implements IConstant, IObservableLists {
     @FXML
     private TextField listSearchField;
 
+    private static boolean ExistingList;
+
     private FilteredList<Movie> movies;
+
+
+    public static boolean isExistingList() {
+        return ExistingList;
+    }
 
 
     @FXML
     public void initialize() throws IOException {
         if (IObservableLists.getMoviesObservableList().size() != 0) {
             addMovieButton.setDisable(true);
+            ExistingList = true;
         }
         listTableID.setCellFactory(TextFieldTableCell.<Movie, Integer>forTableColumn(new IntegerStringConverter()));
         listTableTitle.setCellFactory(TextFieldTableCell.forTableColumn());
@@ -77,5 +85,8 @@ public class MovieListController implements IConstant, IObservableLists {
         } catch (IOException ignore) {
 
         }
+    }
+
+    public void saveAndQuitButton(ActionEvent event) {
     }
 }
