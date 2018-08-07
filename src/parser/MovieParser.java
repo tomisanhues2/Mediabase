@@ -29,10 +29,15 @@ public class MovieParser extends Movie implements IMovie {
     private void getDetailsFromWeb() throws UnirestException {
         HttpResponse<String> detailsResponse = Unirest.get(IMovie.GET_DETAILS_URL_FROM_WEB(movieID)).asString();
         JSONObject detailsJSON = new JSONObject(detailsResponse.getBody());
+
         setID(getTotalMovieID());
         setTitle(detailsJSON.getString("title"));
         setYear(detailsJSON.getString("release_date"));
-        setGenres(detailsJSON.getJSONArray("genres").getJSONObject(0).getString("name"));
+        if (detailsJSON.optJSONArray("genres").length() < 1 || detailsJSON.optJSONArray("genres") == null) {
+            setGenres("N/A");
+        } else {
+            setGenres(detailsJSON.optJSONArray("genres").optJSONObject(0).optString("name", "N/A"));
+        }
         setScore(detailsJSON.getInt("vote_average"));
 
     }
@@ -49,10 +54,14 @@ public class MovieParser extends Movie implements IMovie {
         setActors(actorsString);
     }
 
-    private void getImagesFromWebURL() throws UnirestException{
+    private void getImagesFromWebURL() throws UnirestException {
         HttpResponse<String> imagesResponse = Unirest.get(IMovie.GET_IMAGES_URL_FROM_WEB(movieID)).asString();
         JSONObject imagesJSON = new JSONObject(imagesResponse.getBody());
         JSONArray imagesArray = imagesJSON.getJSONArray("posters");
-        setImageURL(imagesArray.getJSONObject(0).getString("file_path"));
+        if (imagesArray.length() < 1) {
+            setImageURL("https://i.imgur.com/eG4HIxN.jpg");
+        } else {
+            setImageURL(imagesArray.getJSONObject(0).getString("file_path"));
+        }
     }
 }

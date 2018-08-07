@@ -14,7 +14,7 @@ public class AddMovie {
     public AddMovie(String title, String year, Image thumbnail, String rating, String description, int databaseID) {
         this.title = title;
         setYear(year);
-        this.thumbnail = thumbnail;
+        setThumbnail(thumbnail);
         setRating(rating);
         setDescription(description);
         setDatabaseID(databaseID);

@@ -11,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -20,8 +21,11 @@ import objects.Movie;
 import resources.HoverTextFieldTableCell;
 import resources.IConstant;
 import resources.IObservableLists;
+import resources.MySQLManager;
 
 import java.io.IOException;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 public class MovieListController implements IConstant, IObservableLists {
 
@@ -41,6 +45,16 @@ public class MovieListController implements IConstant, IObservableLists {
     private Button addMovieButton;
     @FXML
     private TextField listSearchField;
+    @FXML
+    private TextField listNameField;
+    @FXML
+    private TextField listAuthorField;
+    @FXML
+    private Button saveListButton;
+    @FXML
+    private HBox configHBox;
+    @FXML
+    private HBox menuBarHBox;
 
     private static boolean ExistingList;
 
@@ -56,8 +70,12 @@ public class MovieListController implements IConstant, IObservableLists {
     public void initialize() throws IOException {
         if (IObservableLists.getMoviesObservableList().size() != 0) {
             addMovieButton.setDisable(true);
+            saveListButton.setText("Exit");
+
+            configHBox.setVisible(false);
             ExistingList = true;
         }
+
         listTableID.setCellFactory(TextFieldTableCell.<Movie, Integer>forTableColumn(new IntegerStringConverter()));
         listTableTitle.setCellFactory(TextFieldTableCell.forTableColumn());
         listTableYear.setCellFactory(TextFieldTableCell.forTableColumn());
@@ -65,13 +83,12 @@ public class MovieListController implements IConstant, IObservableLists {
         listTableMore.setCellFactory(HoverTextFieldTableCell.forTableColumn());
         movies = new FilteredList(IObservableLists.getMoviesObservableList(), p -> true);//Pass the data to
         listSearchField.setOnKeyPressed(keyEvent -> {
-                movies.setPredicate(m -> m.getTitle().toLowerCase().contains(listSearchField.getText().toLowerCase().trim()));
+            movies.setPredicate(m -> m.getTitle().toLowerCase().contains(listSearchField.getText().toLowerCase().trim()));
         });
         movieTable.setItems(movies);
 //        listTablePoster.setCellFactory(TextFieldTableCell.forTableColumn());
 
     }
-
 
 
     public void addMovieButton(ActionEvent actionEvent) {
@@ -88,5 +105,15 @@ public class MovieListController implements IConstant, IObservableLists {
     }
 
     public void saveAndQuitButton(ActionEvent event) {
+        if (!isExistingList()) {
+            if (!(listAuthorField.getText().isEmpty() || listNameField.getText().isEmpty())) {
+                ArrayList<Movie> movies = new ArrayList<>();
+                movies.addAll(IObservableLists.getMoviesObservableList());
+                MySQLManager.createMoviesFromList(movies, listAuthorField.getText(), listNameField.getText());
+                System.out.println("Saved to database");
+            } else {
+
+            }
+        }
     }
 }

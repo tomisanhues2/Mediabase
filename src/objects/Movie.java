@@ -69,7 +69,11 @@ public class Movie extends IDManager implements Serializable, IObservableLists {
     }
 
     public void setYear(String year) {
-        this.year = year.substring(0,4);
+        if (year.length() < 4) {
+            this.year = "0000";
+        } else {
+            this.year = year.substring(0, 4);
+        }
     }
 
     public String getGenres() {
@@ -77,7 +81,11 @@ public class Movie extends IDManager implements Serializable, IObservableLists {
     }
 
     public void setGenres(String genres) {
-        this.genres = genres;
+        if (genres == null) {
+            this.genres = "N/A";
+        }else {
+            this.genres = genres;
+        }
     }
 
     public String getActors() {
