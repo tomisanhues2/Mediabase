@@ -41,11 +41,10 @@ public class MySQLManager implements IObservableLists {
 
     public static void createMoviesFromList(ArrayList<Movie> movies, String listName, String authorName) {
         try {
-            System.out.println(movies);
-            System.out.println(totalListCount);
-            insertRowIntoLists(totalListCount + 1, listName, authorName);
-            String queryTable = "CREATE TABLE movie_list_" + (totalListCount + 1) + " (MovieDB_ID INT);";
-            String queryFields = "INSERT INTO movie_list_" + (totalListCount + 1) + " (MovieDB_ID) VALUES(?);";
+            int newListID = getNextAvailableID();
+            insertRowIntoLists(newListID, listName, authorName);
+            String queryTable = "CREATE TABLE movie_list_" + newListID + " (MovieDB_ID INT);";
+            String queryFields = "INSERT INTO movie_list_" + newListID + " (MovieDB_ID) VALUES(?);";
             PreparedStatement preparedStatement = connection.prepareStatement(queryFields);
             preparedStatement.execute(queryTable);
             connection.setAutoCommit(false);
@@ -59,6 +58,21 @@ public class MySQLManager implements IObservableLists {
         } catch (SQLException ignored) {
             ignored.printStackTrace();
         }
+    }
+
+    public static int getNextAvailableID() {
+        Statement statement = null;
+        String query = "SELECT ID FROM movie_lists;";
+        int newListID = 1;
+        try {
+            statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
+            while (resultSet.next()) {
+                newListID++;
+            }
+        } catch (SQLException ignore) {
+        }
+        return newListID;
     }
 
     private static void insertRowIntoLists(int listID, String listName, String authorName) {
