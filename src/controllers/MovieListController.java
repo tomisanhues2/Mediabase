@@ -111,9 +111,12 @@ public class MovieListController implements IConstant, IObservableLists {
                 movies.addAll(IObservableLists.getMoviesObservableList());
                 MySQLManager.createMoviesFromList(movies, listAuthorField.getText(), listNameField.getText());
                 System.out.println("Saved to database");
+                System.exit(0);
             } else {
 
             }
+        } else {
+            System.exit(0);
         }
     }
 }
